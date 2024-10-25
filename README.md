@@ -4,9 +4,9 @@
 
 ### Profesor: Daniel San Martín
 
-Nombre Estudiante: 
+Nombre Estudiante: Manuel Jerez
 
-Rut Estudiante:
+Rut Estudiante: 21.353.476-9
 
 **La evaluación tiene un puntaje total de 90 pts, 60% de exigencia.**
 <hr>
@@ -80,6 +80,10 @@ Carpeta o Paquete en el proyecto con nombre **_solucion_ (cl.ucn.solucion)**. Mo
 e implemente nuevas clases para implementar el patrón. Típicamente, con el patrón Strategy se puede aplicar una estrategia 
 a la vez, sin embargo, para este proyecto usted deberá aplicar todas las estrategias de descuento disponibles. (**50 pts**).
 2. Explique porqué es adecuada la implementación del patrón Strategy para este proyecto y que principio de diseño 
+
+Respuesta Item 2: el patron strategy en este caso de los descuentos sirve para parametrizar los calculos de los descuentos usados por el GerenciadorDescuento,se usa para encapsular una familia de metodos.
+Asi de esta manera tenemos un orden y clases cohesas y un buen ocultamiento de la informacion, ya que asi el Gerenciador no tendria todos los metodos y orden de descuentos el solo.
+
 atiende. Puede apoyarse con algún diagrama de clases construido con su editor de diagrama favorito o a mano (**20pts**). 
 3. Implemente una nueva forma de descuento con la siguiente regla: Cada vez que el total de compras sea superior a 50.000
 se aplicará un descuento del 10%. (**20pts**)

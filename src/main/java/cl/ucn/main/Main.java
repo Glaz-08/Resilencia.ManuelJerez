@@ -1,7 +1,6 @@
 package cl.ucn.main;
 
 import cl.ucn.modelo.Cliente;
-import cl.ucn.modelo.GerenciadorDescuento;
 import cl.ucn.modelo.Producto;
 import cl.ucn.modelo.Servicio;
 import jakarta.persistence.EntityManager;
@@ -110,18 +109,23 @@ public class Main extends Application {
         TextField precioFinalTxt = new TextField();
         precioFinalTxt.setEditable(false);
 
+        Text nuevoDescuentoLbl = new Text("Nuevo Descuento");// este descuento parta el total de compras sobre 50mil
+        TextField nuevoDescuentoTxt = new TextField();
+        nuevoDescuentoTxt.setEditable(false);
           /*
             Botón calcular los descuentos
          */
         Button calcularDescuentoBtn = new Button("Calcular Descuento");
         calcularDescuentoBtn.setOnAction(event -> {
-            Cliente clienteSeleccionado = comboBox.getValue();
+            Cliente clienteSeleccionado = comboBox.getValue();//obtencion del cliente seleccionado
             if (clienteSeleccionado != null) {
                 // Una nueva instancia de servicio
                 Servicio servicio = new Servicio(em);
                 List<Producto> productos = servicio.getProductosByRut(clienteSeleccionado.getRut());
-                GerenciadorDescuento gerenciadorDescuento = new GerenciadorDescuento();
-                List<Integer> precios = gerenciadorDescuento.calcularPrecioFinal(productos, clienteSeleccionado.getFechaNacimiento(),
+
+                DescuentosStrategy gerenciadorDescuento = new DescuentosStrategy();//descuentosStrategy
+                //no esoty seguyro si funcionara, pero no me da errores de sintaxis
+                List<Integer> precios = gerenciadorDescuento.calcularDescuento(productos, clienteSeleccionado.getFechaNacimiento(),
                         String.valueOf(clienteSeleccionado.getAnhoRegistro()), fechaActualTxt.getText());
 
                 precioInicialTxt.setText(String.valueOf(precios.get(0)));
@@ -164,11 +168,14 @@ public class Main extends Application {
         gridPane.add(fechaActualTxt, 1,2);
 
         //Gridpane para los descuentos
+        
         GridPane gridPane2 = new GridPane();
+        gridPane2.add(nuevoDescuentoLbl, 5,0); //adicionar en la linea 171, le hice casooo
         gridPane2.setPadding(new Insets(10, 10, 10, 10));
         gridPane2.setHgap(10);
         gridPane2.setVgap(10);
         gridPane2.add(precioInicialLbl, 0,0);
+        gridPane2.add(nuevoDescuentoTxt, 5,1); //adicionar en la linea 178
         gridPane2.add(descuentoFidelidadLbl, 1,0);
         gridPane2.add(descuentoCumpleanhosLbl, 2,0);
         gridPane2.add(descuentoCatergoriaLbl, 3,0);
